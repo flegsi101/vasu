@@ -1,0 +1,34 @@
+@import "colors";
+
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, $primary 0%, $primary3 100%);
+}
+
+#bg {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: transparentize($white, 0.16);
+}
+
+#title {
+  flex: 1;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 90px;
+  font-weight: bold;
+  color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#content {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+

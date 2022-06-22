@@ -1,0 +1,7 @@
+{
+  "name": "vasu",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
