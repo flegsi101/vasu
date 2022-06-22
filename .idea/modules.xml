@@ -2,6 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server.iml" filepath="$PROJECT_DIR$/.idea/modules/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server.integrationTest.iml" filepath="$PROJECT_DIR$/.idea/modules/server.integrationTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server.native-test.iml" filepath="$PROJECT_DIR$/.idea/modules/server.native-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server.quarkus-generated-sources.iml" filepath="$PROJECT_DIR$/.idea/modules/server.quarkus-generated-sources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server.quarkus-test-generated-sources.iml" filepath="$PROJECT_DIR$/.idea/modules/server.quarkus-test-generated-sources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/server.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/vasu.iml" filepath="$PROJECT_DIR$/.idea/vasu.iml" />
     </modules>
   </component>
