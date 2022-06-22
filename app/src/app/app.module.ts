@@ -6,7 +6,6 @@ import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {AuthService} from '@services/auth.service';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxsModule} from '@ngxs/store';
 import {environment} from '../environments/environment';
@@ -15,6 +14,7 @@ import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 import {AuthState} from './state/auth.state';
 import {AuthModule} from './auth/auth.module';
 import {HomePageModule} from './home/home.module';
+import {VariablesService} from "./variables.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +36,7 @@ import {HomePageModule} from './home/home.module';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthService,
+    VariablesService
   ],
   bootstrap: [AppComponent],
 })
