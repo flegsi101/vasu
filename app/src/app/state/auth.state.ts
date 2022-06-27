@@ -60,12 +60,19 @@ export interface AuthStateModel {
   refreshToken: string;
 }
 
+const emptyAuthState = {
+  id: "",
+  name: "",
+  accessToken: "",
+  refreshToken: ""
+}
+
 // |================================================================================================
 // | STATE
 // |================================================================================================
 @State<AuthStateModel>({
   name: 'appState',
-  defaults: null
+  defaults: emptyAuthState
 })
 @Injectable()
 export class AuthState {
@@ -92,16 +99,14 @@ export class AuthState {
 
   @Action(RemoveAuthenticatedUser)
   removeAuthenticatedUser(context: StateContext<AuthStateModel>) {
-    context.setState(null);
+    context.setState(emptyAuthState);
   }
 
   @Action(SetRefreshToken)
   setRefreshToken(context: StateContext<AuthStateModel>, {payload}: SetRefreshToken) {
     if (!context.getState()) {
       context.setState({
-        id: null,
-        name: null,
-        accessToken: null,
+        ...emptyAuthState,
         refreshToken: payload
       });
     } else {

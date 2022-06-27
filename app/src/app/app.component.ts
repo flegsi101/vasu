@@ -7,5 +7,5 @@ import {TokenManager} from './auth/services/token-manager';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(tokenManager: TokenManager) {}
 }

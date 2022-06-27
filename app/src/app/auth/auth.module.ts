@@ -6,7 +6,6 @@ import {AuthComponent} from './components/auth.component';
 import {CallbackComponent} from './components/callback.component';
 import {TokenManager} from './services/token-manager';
 import {CommonModule} from '@angular/common';
-import {IonicModule} from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import {IonicModule} from '@ionic/angular';
   ],
   imports: [
     CommonModule,
-    IonicModule,
     AuthRoutingModule
   ],
   providers: [

@@ -24,10 +24,10 @@ export class CallbackComponent implements OnInit{
   ngOnInit(): void {
     this.route.queryParams.subscribe({
       next: (params) => {
-        if (!params.code) {
+        if (!params['code']) {
           this.router.navigate(['..', 'login']);
         } else {
-          const url = `${this.vars.backendUrl}/auth/token?code=${params.code}&redirectUri=${this.vars.frontendUrl}/auth/callback`;
+          const url = `${this.vars.backendUrl}/auth/token?code=${params['code']}&redirectUri=${this.vars.frontendUrl}/auth/callback`;
           this.http.get<AuthResponse>(url).subscribe({
             next: (next) => {
               this.store.dispatch(new SetAuthenticatedUser(next));

@@ -5,6 +5,8 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/app/dist" />
       <excludeFolder url="file://$MODULE_DIR$/app/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/app-ionic/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/app-ionic/tmp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
