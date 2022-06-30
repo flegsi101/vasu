@@ -6,14 +6,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgxsModule} from '@ngxs/store';
 import {environment} from '../environments/environment';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
-import {AuthState} from './state/auth.state';
-import {AuthModule} from './auth/auth.module';
+import {AuthState} from '@app/state';
 import {HomePageModule} from './home/home.module';
 import {VariablesService} from './variables.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {AuthComponent} from "./components/auth.component";
+import {AuthGuard} from "@app/services";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AuthComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -24,11 +25,11 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     FontAwesomeModule,
-    AuthModule,
     HomePageModule,
   ],
   providers: [
-    VariablesService
+    VariablesService,
+    AuthGuard
   ],
   bootstrap: [AppComponent],
 })
