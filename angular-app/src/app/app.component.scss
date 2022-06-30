@@ -1,0 +1,9 @@
+@import "colors";
+
+:host {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(217.35% 89.11% at 15.56% 10.89%, #433923 0%, #474133 0.01%, #473336 100%);
+}

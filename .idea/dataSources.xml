@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="vasuDb - dev" uuid="a277638d-dbf2-4f6e-929f-333c4ebc1947">
+    <data-source source="LOCAL" name="local" uuid="73a7e4b8-0921-4279-9735-a7dc7887c4f4">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

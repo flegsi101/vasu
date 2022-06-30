@@ -7,19 +7,21 @@ import java.util.Set;
 
 public class TokenService {
 
-    public static String generateAccessToken(String id) {
+    public static String generateAccessToken(String id, String name) {
         return Jwt
                 .issuer("vasu")
                 .upn(id)
+                .claim("username", name)
                 .expiresIn(Duration.ofHours(1))
                 .groups(Set.of("user"))
                 .sign();
     }
 
-    public static String generateRefreshToken(String id) {
+    public static String generateRefreshToken(String id, String name) {
         return Jwt
                 .issuer("vasu")
                 .upn(id)
+                .claim("username", name)
                 .expiresIn(Duration.ofDays(30))
                 .groups(Set.of("user-refresh"))
                 .sign();

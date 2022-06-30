@@ -3,10 +3,8 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/app/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/app/tmp" />
-      <excludeFolder url="file://$MODULE_DIR$/app-ionic/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/app-ionic/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/angular-app/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/angular-app/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

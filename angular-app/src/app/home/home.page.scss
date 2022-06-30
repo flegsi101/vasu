@@ -1,0 +1,60 @@
+@import "colors";
+
+:host {
+  flex: 1;
+}
+
+#header {
+  height: 104px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: hsl(40,8,96);
+  font-size: 32px;
+  font-weight: 600;
+}
+
+#nav-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+
+  .entry {
+    margin: 12px;
+    width: 144px;
+    position: relative;
+
+    &:before {
+      content: "";
+      display: block;
+      padding-top: 100%;
+    }
+
+    .content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 16px;
+      background: hsl(40,72,72);
+      text-decoration: none;
+
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 500;
+        color: hsl(40,8,16);
+        padding-top: 4px;
+      }
+    }
+  }
+
+  #listenmarks {
+    background: hsl(40,72,72);
+  }
+}

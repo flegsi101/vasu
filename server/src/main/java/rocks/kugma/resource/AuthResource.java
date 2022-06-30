@@ -1,18 +1,17 @@
 package rocks.kugma.resource;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import rocks.kugma.data.RefreshTokenEntity;
 import rocks.kugma.data.SpotifyCredentialsEntity;
 import rocks.kugma.resource.dto.AuthResponse;
-import rocks.kugma.resource.dto.RefreshResponse;
 import rocks.kugma.resource.util.TokenService;
 import rocks.kugma.spotify.SpotifyTokenService;
 import rocks.kugma.spotify.SpotifyUserService;
 import rocks.kugma.spotify.dto.SpotifyTokenResponse;
 import rocks.kugma.spotify.dto.SpotifyUser;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.eclipse.microprofile.jwt.JsonWebToken;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -79,8 +78,8 @@ public class AuthResource {
 
         credentials.persist();
 
-        String accessToken = TokenService.generateAccessToken(credentials.id);
-        String refreshToken = TokenService.generateRefreshToken(credentials.id);
+        String accessToken = TokenService.generateAccessToken(credentials.id, user.displayName);
+        String refreshToken = TokenService.generateRefreshToken(credentials.id, user.displayName);
 
         RefreshTokenEntity refreshTokenEntity = new RefreshTokenEntity(refreshToken.hashCode(), credentials.id, false);
         refreshTokenEntity.persist();
@@ -108,8 +107,8 @@ public class AuthResource {
             return Response.status(401).entity("Token already used").build();
         }
 
-        String accessToken = TokenService.generateAccessToken(entry.getUserId());
-        String refreshToken = TokenService.generateRefreshToken(entry.getUserId());
+        String accessToken = TokenService.generateAccessToken(entry.getUserId(), jwt.getClaim("username"));
+        String refreshToken = TokenService.generateRefreshToken(entry.getUserId(), jwt.getClaim("username"));
 
         RefreshTokenEntity newEntry = new RefreshTokenEntity(refreshToken.hashCode(), entry.getUserId(), false);
         newEntry.persist();
@@ -118,6 +117,6 @@ public class AuthResource {
         entry.persist();
 
 
-        return Response.ok().entity(new RefreshResponse(newEntry.getUserId(), accessToken, refreshToken)).build();
+        return Response.ok().entity(new AuthResponse( jwt.getClaim("username"), newEntry.getUserId(), accessToken, refreshToken)).build();
     }
 }
