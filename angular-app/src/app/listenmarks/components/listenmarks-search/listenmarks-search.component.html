@@ -1,0 +1,30 @@
+<div class="listenmarks-search__search-bar">
+  <fa-icon [icon]="searchIcon" size="lg"></fa-icon>
+  <input class="listenmarks-search__search-bar__input" placeholder="search" (focusin)="searchFocusIn()"
+         (focusout)="searchFocusOut()" [formControl]="query" (keydown)="submitSearch($event)">
+  <div close="search-bar__clear" *ngIf="query.value" (click)="clearSearch()">
+    <fa-icon [icon]="crossIcon" size="lg"></fa-icon>
+  </div>
+</div>
+
+<div class="listenmarks-search__content">
+  <ng-container *ngIf="searchResults.length > 0; else recommendations" [ngTemplateOutlet]="results"></ng-container>
+</div>
+
+<div class="listenmarks-search__footer" *ngIf="!searchFocus">
+  <a class="back-button" [routerLink]="['../']">
+    <fa-icon class="back-button__icon" [icon]="backIcon" size="lg"></fa-icon>
+    <span class="back-button__text">zurück</span>
+  </a>
+  <div style="flex: 1"></div>
+</div>
+
+<ng-template #recommendations>
+  <div class="listenmarks-search__recommendations">vorgeschlagen</div>
+</ng-template>
+
+<ng-template #results>
+  <div class="listenmarks-search__results">
+    <div *ngFor="let res of searchResults" (click)="selectResult(res)">{{res['name']}}</div>
+  </div>
+</ng-template>
