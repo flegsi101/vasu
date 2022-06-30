@@ -93,20 +93,28 @@ export class AuthComponent implements OnInit {
     })
   }
 
+  cancel() {
+    localStorage.removeItem("refreshToken");
+    this.componentState = "mustLogin";
+  }
+
   private refreshTokens(refreshToken: string): void {
     this.http.get<AuthResponse>(`http://${this.host}:8080/auth/refresh`, {
       headers: {
         'Authorization': 'Bearer ' + refreshToken
       }
     }).subscribe(next => {
-      this.store.dispatch(new SetAuth({
-        id: next.userId,
-        name: next.userName,
-        accessToken: next.accessToken,
-        refreshToken: next.refreshToken
-      }))
-      let url = localStorage.getItem("authGuard_url")
-      this.router.navigateByUrl(url ? url : '/')
-    })
+        this.store.dispatch(new SetAuth({
+          id: next.userId,
+          name: next.userName,
+          accessToken: next.accessToken,
+          refreshToken: next.refreshToken
+        }))
+        let url = localStorage.getItem("authGuard_url")
+        this.router.navigateByUrl(url ? url : '/')
+      },
+      error => {
+        this.componentState = 'mustLogin'
+      })
   }
 }

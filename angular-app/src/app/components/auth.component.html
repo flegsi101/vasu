@@ -25,7 +25,8 @@
 </ng-template>
 
 <ng-template #loggingIn>
-  <div class="loggingIn">
-    <div class="loggingIn__message">{{ componentState }}</div>
+  <div class="logging-in">
+    <div class="logging-in__message">{{ componentState }}</div>
+    <button class="logging-in__cancel" (click)="cancel()">cancel</button>
   </div>
 </ng-template>

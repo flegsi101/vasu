@@ -21,10 +21,8 @@ interface SpotifySearchProxy {
     @Produces(MediaType.APPLICATION_JSON)
     SpotifySearchResult search(
             @HeaderParam("Authorization") String accessToken,
-            @QueryParam("q") String query,
-            @QueryParam("limit") int limit,
-            @QueryParam("offset") int offset,
-            @QueryParam("types") List<String> types);
+            @QueryParam("q") String q,
+            @QueryParam("type") String type);
 
     @ClientExceptionMapper
     static RuntimeException toException(Response response) {

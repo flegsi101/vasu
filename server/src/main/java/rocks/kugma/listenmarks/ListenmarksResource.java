@@ -28,7 +28,7 @@ public class ListenmarksResource {
     @Path("/search")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"users"})
+    @RolesAllowed({"user"})
     public Response search(SearchDto search) {
         SpotifyCredentialsEntity creds = SpotifyCredentialsEntity.findById(jwt.getName());
         return Response.ok()
