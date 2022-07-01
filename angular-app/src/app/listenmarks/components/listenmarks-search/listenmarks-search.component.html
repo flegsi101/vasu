@@ -1,3 +1,5 @@
+<button class="search__button button" *ngIf="showSearchButton" (click)="search()">suche</button>
+
 <div class="listenmarks-search__search-bar">
   <fa-icon [icon]="searchIcon" size="lg"></fa-icon>
   <input class="listenmarks-search__search-bar__input" placeholder="search" (focusin)="searchFocusIn()"
@@ -8,7 +10,7 @@
 </div>
 
 <div class="listenmarks-search__content">
-  <ng-container *ngIf="searchResults.length > 0; else recommendations" [ngTemplateOutlet]="results"></ng-container>
+  <ng-container *ngIf="searching || searchResults; else recommendations" [ngTemplateOutlet]="results"></ng-container>
 </div>
 
 <div class="listenmarks-search__footer" *ngIf="!searchFocus">
@@ -20,11 +22,21 @@
 </div>
 
 <ng-template #recommendations>
-  <div class="listenmarks-search__recommendations">vorgeschlagen</div>
+  <div class="listenmarks-search__recommendations">
+    <div class="recommendations__title">vorgeschlagen</div>
+  </div>
 </ng-template>
 
 <ng-template #results>
-  <div class="listenmarks-search__results">
-    <div *ngFor="let res of searchResults" (click)="selectResult(res)">{{res['name']}}</div>
-  </div>
+  <ng-container>
+    <div class="listenmarks-search__results">
+      <div class="search-result" *ngFor="let album of searchResults?.items" (click)="selectAlbum(album)">
+        <img class="search-result__image" [src]="album.images[0]?.url" />
+        <div class="search-result__name">{{album.name}}</div>
+        <div class="search-result__artists">
+          <ng-container *ngFor="let artist of album.artists">{{artist.name}}</ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </ng-template>

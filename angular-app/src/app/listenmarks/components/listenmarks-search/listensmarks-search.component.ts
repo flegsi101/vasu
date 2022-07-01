@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {faArrowLeft, faCross, faMagnifyingGlass, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FormControl} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {Store} from "@ngxs/store";
 import {VariablesService} from "../../../variables.service";
 import {AuthState} from "../../../state";
+import {SearchResultDto} from '../../dto/search-result.dto';
+import {AlbumDto} from '../../../dto';
+import {Observable} from 'rxjs';
+import {ListenmarksState, ListenmarksStateModel} from '../../state';
 
 @Component({
   selector: 'app-listen-mark',
@@ -12,25 +16,42 @@ import {AuthState} from "../../../state";
   styleUrls: ['./listenmarks-search.component.scss', '../shared.scss']
 })
 export class ListensmarksSearchComponent implements OnInit {
+
   backIcon = faArrowLeft
   searchIcon = faMagnifyingGlass
   crossIcon = faXmark
 
   searchFocus = false;
   query = new FormControl()
-  searchResults = []
+  searchResults: SearchResultDto | null = null
+
+  key = ""
+
+  showSearchButton = false;
+  searching = false;
+
+  canSendQuery = false;
+
+  state$: Observable<ListenmarksStateModel>
 
   constructor(
     private http: HttpClient,
     private store: Store,
     private variables: VariablesService
-  ) { }
+  ) {
+    this.state$ = store.select(ListenmarksState)
+    this.state$.subscribe(state => {
+
+    })
+  }
 
   ngOnInit(): void {
-
+    this.query.valueChanges.subscribe(v => this.showSearchButton = v)
   }
 
   searchFocusIn() {
+    if (this.query.value && !this.showSearchButton)
+      this.showSearchButton = true
     this.searchFocus = true
   }
 
@@ -39,9 +60,10 @@ export class ListensmarksSearchComponent implements OnInit {
   }
 
   submitSearch(event: KeyboardEvent) {
-    if (event.code === "Enter") {
+    if (event.code === "Enter" || event.key === "Enter") {
+      (event.target as HTMLElement).blur();
       this.search()
-    } else if (event.code === "Escape") {
+    } else if (event.code === "Escape" || event.key === "Escape") {
       (event.target as HTMLElement).blur();
     }
   }
@@ -50,21 +72,24 @@ export class ListensmarksSearchComponent implements OnInit {
     this.query.setValue(null);
   }
 
-  selectResult(album: any) {
+  selectAlbum(selectAlbum: AlbumDto) {
 
   }
 
-  private search() {
+  search() {
+    this.showSearchButton = false
+    this.searching = true;
     const accessToken = this.store.selectSnapshot(AuthState.all).accessToken
     const url = `${this.variables.backendUrl}/api/v1/listenmarks/search`
-    this.http.post<any>(url, {
+    this.http.post<SearchResultDto>(url, {
       query: this.query.value
     }, {
       headers: {
         'Authorization': `Bearer ${accessToken}`
       }
     }).subscribe(response => {
-      this.searchResults = response.items;
+      this.searchResults = response;
+      this.searching = false;
       console.log(this.searchResults)
     })
   }

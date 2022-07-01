@@ -4,6 +4,9 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import rocks.kugma.data.SpotifyCredentialsEntity;
 import rocks.kugma.listenmarks.dto.SearchDto;
 import rocks.kugma.spotify.SpotifySearchService;
+import rocks.kugma.spotify.dto.SpotifyAlbum;
+import rocks.kugma.spotify.dto.SpotifySearchResult;
+import rocks.kugma.spotify.dto.SpotifySearchResultItem;
 
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
@@ -31,8 +34,9 @@ public class ListenmarksResource {
     @RolesAllowed({"user"})
     public Response search(SearchDto search) {
         SpotifyCredentialsEntity creds = SpotifyCredentialsEntity.findById(jwt.getName());
+        SpotifySearchResultItem<SpotifyAlbum> result = searchService.searchAlbums(creds.accessToken, search.query);
         return Response.ok()
-                .entity(searchService.searchAlbums(creds.accessToken, search.query))
+                .entity(result)
                 .build();
     }
 }

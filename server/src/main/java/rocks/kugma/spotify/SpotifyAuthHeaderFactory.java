@@ -20,7 +20,7 @@ public class SpotifyAuthHeaderFactory implements ClientHeadersFactory {
     public MultivaluedMap<String, String> update(MultivaluedMap<String, String> incomingHeaders, MultivaluedMap<String, String> clientOutgoingHeaders) {
         String accessToken = clientOutgoingHeaders.get("Authorization").get(0).replace("Bearer ", "");
         SpotifyCredentialsEntity creds = SpotifyCredentialsEntity.find("accessToken", accessToken).firstResult();
-        if (creds.expiresAt.after(new Date())) {
+        if (creds.expiresAt.before(new Date())) {
             SpotifyTokenResponse tokenResponse = tokenService.refreshTokens(creds.refreshToken);
             creds.accessToken = tokenResponse.getAccessToken();
             creds.refreshToken = tokenResponse.getRefreshToken();
