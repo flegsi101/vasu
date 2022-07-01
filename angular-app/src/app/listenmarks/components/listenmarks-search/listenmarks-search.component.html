@@ -1,42 +1,55 @@
-<button class="search__button button" *ngIf="showSearchButton" (click)="search()">suche</button>
+<link rel="stylesheet" href="listenmarks-search.component.scss">
+<div class="searchbar-container">
 
-<div class="listenmarks-search__search-bar">
+<div class="search-bar">
   <fa-icon [icon]="searchIcon" size="lg"></fa-icon>
-  <input class="listenmarks-search__search-bar__input" placeholder="search" (focusin)="searchFocusIn()"
-         (focusout)="searchFocusOut()" [formControl]="query" (keydown)="submitSearch($event)">
-  <div close="search-bar__clear" *ngIf="query.value" (click)="clearSearch()">
+  <input class="search-bar__input" placeholder="search" (focusin)="searchFocusIn()"
+         (focusout)="searchFocusOut()" [formControl]="queryControl" (keydown)="submitSearch($event)">
+  <div close="search-bar__clear" *ngIf="(query$ | async)" (click)="clearSearch()">
     <fa-icon [icon]="crossIcon" size="lg"></fa-icon>
   </div>
 </div>
-
-<div class="listenmarks-search__content">
-  <ng-container *ngIf="searching || searchResults; else recommendations" [ngTemplateOutlet]="results"></ng-container>
 </div>
 
-<div class="listenmarks-search__footer" *ngIf="!searchFocus">
+<div class="content">
+  <ng-container *ngIf="searching$ | async" [ngTemplateOutlet]="searching"></ng-container>
+  <ng-container *ngIf="!(searching$ | async)">
+    <ng-container *ngIf="searchResults; else recommendations" [ngTemplateOutlet]="results"></ng-container>
+  </ng-container>
+
+  <ng-template #searching>
+    <div class="spinner">
+      <div class="wheel"></div>
+    </div>
+  </ng-template>
+
+  <ng-template #recommendations>
+    <div class="recommendations">
+      <div class="recommendations__title">vorgeschlagen</div>
+    </div>
+  </ng-template>
+
+  <ng-template #results>
+    <ng-container>
+      <div class="results">
+        <div class="search-result" *ngFor="let album of searchResults?.items" (click)="selectAlbum(album)">
+          <img class="search-result__image" [src]="album.images[0]?.url" />
+          <div class="search-result__name">{{album.name}}</div>
+          <div class="search-result__artists">
+            <ng-container *ngFor="let artist of album.artists">{{artist.name}}</ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>
+
+<button class="search__button button" *ngIf="showSearchButton" (click)="search()">suche</button>
+
+<div class="footer" *ngIf="!searchFocus">
   <a class="back-button" [routerLink]="['../']">
     <fa-icon class="back-button__icon" [icon]="backIcon" size="lg"></fa-icon>
     <span class="back-button__text">zurück</span>
   </a>
   <div style="flex: 1"></div>
 </div>
-
-<ng-template #recommendations>
-  <div class="listenmarks-search__recommendations">
-    <div class="recommendations__title">vorgeschlagen</div>
-  </div>
-</ng-template>
-
-<ng-template #results>
-  <ng-container>
-    <div class="listenmarks-search__results">
-      <div class="search-result" *ngFor="let album of searchResults?.items" (click)="selectAlbum(album)">
-        <img class="search-result__image" [src]="album.images[0]?.url" />
-        <div class="search-result__name">{{album.name}}</div>
-        <div class="search-result__artists">
-          <ng-container *ngFor="let artist of album.artists">{{artist.name}}</ng-container>
-        </div>
-      </div>
-    </div>
-  </ng-container>
-</ng-template>

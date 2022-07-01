@@ -3,7 +3,18 @@
 </div>
 
 <div class="listenmarks-list__content">
-
+  <div class="results">
+    <div class="search-result" *ngFor="let album of (listemarks$ | async)">
+      <img class="search-result__image" [src]="album.imageUri" />
+      <div class="search-result__name">{{album.name}}</div>
+      <div class="search-result__artists">
+        <ng-container *ngFor="let artist of album.artists">{{artist}}</ng-container>
+      </div>
+      <button class="delete-button" (click)="delete($event, album.id)">
+        <fa-icon [icon]="trash" size="lg"></fa-icon>
+      </button>
+    </div>
+  </div>
 </div>
 
 <div class="listenmarks-list__footer">

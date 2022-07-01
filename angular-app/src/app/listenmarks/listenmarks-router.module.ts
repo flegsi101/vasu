@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ListenmarksComponent} from './components/listenmarks.component';
-import {ListensmarksSearchComponent} from "./components/listenmarks-search/listensmarks-search.component";
+import {ListenmarksSearchComponent} from "./components/listenmarks-search/listenmarks-search.component";
 import {ListenmarksListComponent} from "./components/listenmarks-list/listenmarks-list.component";
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'search',
-        component: ListensmarksSearchComponent
+        component: ListenmarksSearchComponent
       }
     ]
   }

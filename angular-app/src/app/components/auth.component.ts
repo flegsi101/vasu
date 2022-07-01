@@ -111,7 +111,7 @@ export class AuthComponent implements OnInit {
           refreshToken: next.refreshToken
         }))
         let url = localStorage.getItem("authGuard_url")
-        this.router.navigateByUrl(url ? url : '/')
+        this.router.navigateByUrl(url && !url.startsWith('/auth') ? url : '/')
       },
       error => {
         this.componentState = 'mustLogin'

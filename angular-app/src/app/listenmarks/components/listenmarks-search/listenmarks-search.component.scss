@@ -1,5 +1,11 @@
 @import "colors";
 
+$searchbarHeight: 48px;
+$searchbarMargin: 16px;
+$totalSearchbarHeight: $searchbarHeight + 2 * $searchbarMargin;
+
+$footerHeight: 71px;
+
 :host {
   flex: 1;
   display: flex;
@@ -7,44 +13,106 @@
   overflow: hidden;
 }
 
-.listenmarks-search {
+.searchbar-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: linear-gradient(to bottom,
+    hsla(40, 8, 8, .52) 0%,
+    hsla(40, 8, 8, .52) $searchbarHeight,
+    hsla(40, 8, 8, 0) $totalSearchbarHeight + 16px);
+  padding-bottom: 16px;
+}
 
-  &__search-bar {
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    height: 48px;
-    background-color: hsla(40,8,8,0.8);
-    margin: 16px;
-    border-radius: 16px;
-    color: hsl(40, 8, 80);
+.search-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: $searchbarHeight;
+  background-color: hsla(40, 8, 8, 0.8);
+  margin: $searchbarMargin;
+  border-radius: 16px;
+  color: hsl(40, 8, 80);
 
-    &__input {
-      margin: 0 8px;
-      background-color: transparent;
-      outline: none;
-      border: none;
-      font-size: 18px;
-      color: hsl(40,8,96);
-      flex: 1;
-
-      ::placeholder {
-        color: hsl(40,8,64);
-      }
-    }
-  }
-
-  &__content {
+  &__input {
+    margin: 0 8px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    color: hsl(40, 8, 96);
     flex: 1;
-    overflow: scroll;
-  }
 
-  &__footer {
-    display: flex;
-    padding: 16px;
+    ::placeholder {
+      color: hsl(40, 8, 64);
+    }
   }
 }
 
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.spinner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .wheel {
+    border: 12px solid hsl(40, 8, 48);
+    border-radius: 50%;
+    border-top: 12px solid $samoan;
+    width: 24px;
+    height: 24px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.results, .recommendations {
+  padding-top: $totalSearchbarHeight;
+  padding-bottom: $footerHeight;
+}
+
+.footer {
+  $extraTop: 8px;
+  height: $footerHeight + $extraTop;
+  padding-top: $extraTop;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to top,
+    hsla(40, 8, 8, .52) 0%,
+    hsla(40, 8, 8, .52) $footerHeight - 16px,
+    hsla(40, 8, 8, 0) $footerHeight + 16px);
+}
 
 .recommendations {
   &__title {
@@ -56,6 +124,7 @@
 
 .search {
   &__button {
+    z-index: 1000;
     position: absolute;
     bottom: 16px;
     right: 16px;
