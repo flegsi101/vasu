@@ -1,6 +1,8 @@
 package rocks.kugma.spotify;
 
 import io.quarkus.rest.client.reactive.ClientExceptionMapper;
+import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
+import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,16 +17,15 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @RegisterRestClient(baseUri = "https://api.spotify.com/v1/search")
+@RegisterClientHeaders(SpotifyAuthHeaderFactory.class)
 interface SpotifySearchProxy {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     SpotifySearchResult search(
             @HeaderParam("Authorization") String accessToken,
-            @QueryParam("q") String query,
-            @QueryParam("limit") int limit,
-            @QueryParam("offset") int offset,
-            @QueryParam("types") List<String> types);
+            @QueryParam("q") String q,
+            @QueryParam("type") String type);
 
     @ClientExceptionMapper
     static RuntimeException toException(Response response) {

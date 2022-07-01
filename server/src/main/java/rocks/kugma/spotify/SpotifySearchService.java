@@ -2,6 +2,7 @@ package rocks.kugma.spotify;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import rocks.kugma.spotify.dto.SpotifyAlbum;
+import rocks.kugma.spotify.dto.SpotifySearchResult;
 import rocks.kugma.spotify.dto.SpotifySearchResultItem;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,6 +17,7 @@ public class SpotifySearchService {
     SpotifySearchProxy proxy;
 
     public SpotifySearchResultItem<SpotifyAlbum> searchAlbums(String accessToken, String query) {
-        return proxy.search(accessToken, query, 50, 0, List.of("albums")).albums;
+        SpotifySearchResult result = proxy.search("Bearer " + accessToken, query,"album");
+        return result.albums;
     }
 }

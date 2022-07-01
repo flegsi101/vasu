@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
 import {Observable} from 'rxjs';
-import {AuthState, AuthStateModel} from '../state/auth.state';
+import {AuthState, AuthStateModel} from '@app/state';
 import {Store} from '@ngxs/store';
-import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
-export class HomePage {
-  public leftAngle = faAngleLeft;
+export class HomeComponent {
   public auth$: Observable<AuthStateModel>;
 
   constructor(private store: Store) {

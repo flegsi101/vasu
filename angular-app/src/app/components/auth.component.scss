@@ -1,0 +1,93 @@
+@import "colors";
+
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, hsl(40, 72%, 64%) 0%, hsl(352, 40%, 52%) 100%);;
+}
+
+.auth {
+  &__logo {
+    position: absolute;
+    width: 110%;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  &__header {
+    flex: 1;
+    font-family: 'Lexend', sans-serif;
+    font-size: 100px;
+    font-weight: 700;
+    color: $rio;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+
+  &__content {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+  }
+}
+
+.login {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__content {
+    flex: 2;
+    padding: 48px;
+    font-weight: 400;
+    color: $black;
+  }
+
+  &__footer {
+    flex: 1;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+  }
+}
+
+.login-button {
+  border: none;
+  outline: none;
+
+  width: 80%;
+  max-width: 240px;
+  padding: 12px 24px;
+  font-family: 'Lexend', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: $black;
+  background-color: $samoan;
+  border-radius: 8px;
+  user-select: none;
+
+  &:active {
+    background-color: mix($samoan, $black, 80);
+  }
+}
+
+.logging-in {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__message {
+    color: $black;
+    font-size: 20px;
+  }
+
+  &__cancel {
+
+  }
+}

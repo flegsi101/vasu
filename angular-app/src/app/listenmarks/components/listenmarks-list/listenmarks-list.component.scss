@@ -1,0 +1,46 @@
+@import "colors";
+
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.listenmarks-list {
+
+  &__header {
+    height: 104px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: hsl(40,8,96);
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__footer {
+    display: flex;
+    padding: 16px;
+  }
+}
+
+.new-button {
+  height: 40px;
+  font-family: Lexend, sans-serif;
+  font-size: 20px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $black;
+  background-color: $samoan;
+  outline: none;
+  border: none;
+  line-height: 40px;
+  border-radius: 8px;
+  text-decoration: none;
+}

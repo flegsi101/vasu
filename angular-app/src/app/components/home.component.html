@@ -1,0 +1,32 @@
+<div class="home">
+  <div class="home__header">
+    <div class="home__header__user-name">Hi {{ (auth$ | async)?.name }}</div>
+  </div>
+  <div class="home__nav">
+
+    <div class="home__nav__entry">
+      <a id="listenmarks" class="home__nav__entry__content" [routerLink]="'/listenmarks'">
+        <span class="title">Hörzeichen</span>
+      </a>
+    </div>
+
+    <div class="home__nav__entry">
+      <div id="?" class="home__nav__entry__content">
+        <span class="title">?</span>
+      </div>
+    </div>
+
+    <div class="home__nav__entry">
+      <div id="??" class="home__nav__entry__content">
+        <span class="title">??</span>
+      </div>
+    </div>
+
+    <div class="home__nav__entry">
+      <div id="???" class="home__nav__entry__content">
+        <span class="title">???</span>
+      </div>
+    </div>
+
+  </div>
+</div>

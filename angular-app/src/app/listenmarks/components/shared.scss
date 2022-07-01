@@ -1,0 +1,18 @@
+.back-button {
+  height: 40px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  color: hsl(40,8,96);
+  text-decoration: none;
+  line-height: 40px;
+
+  &__icon {
+    margin-right: 16px;
+  }
+
+  &__text {
+    font-family: Lexend, sans-serif;
+    font-size: 20px;
+  }
+}
